@@ -111,9 +111,9 @@ DOM
         x35) Write a function to add an extra row to the table
         x36) Write a function to add the class "test" to each row in the table
         x37) Write a function to add a red background to every link in the page
-        38) Console log "Page loaded" when the page is correctly loaded
-        39) Write a function to add new items to a UL
-        40) Write a function to empty a list
+        x38) Console log "Page loaded" when the page is correctly loaded
+        x39) Write a function to add new items to a UL
+        x40) Write a function to empty a list
 */
 
 // 31) Get element with ID "container" from the page
@@ -170,3 +170,163 @@ addTestClass.addEventListener('click', function () {
 })
 
 // 37) Write a function to add a red background to every link in the page
+
+const addLinkBg = document.querySelector('#link-bg')
+addLinkBg.addEventListener('click', function () {
+    console.log(event);
+    const links = document.querySelectorAll('a')
+    links.forEach((link) => {
+        link.classList.toggle('link-bg-red')
+    })
+
+})
+
+// 38) Console log "Page loaded" when the page is correctly loaded
+window.onload = function () {
+    console.log(`Page Loaded`);
+}
+
+// 39) Write a function to add new items to a UL
+const addLi = document.querySelector('#new-li')
+
+addLi.addEventListener('click', function () {
+    const ul = document.querySelector('ul')
+    const liContent = document.querySelector('#ex-39 input')
+    if (liContent.value !== '') {
+        const newLi = document.createElement('li')
+        newLi.innerText = liContent.value
+        ul.appendChild(newLi)
+        liContent.value = ''
+    } else {
+        alert('Please insert a new list item')
+    }
+    // console.log('ifire');
+    // console.log(liContent);
+
+
+})
+
+
+
+
+// 40) Write a function to empty a list
+
+const fireList = document.querySelector('#empty-list')
+fireList.addEventListener('click', function () {
+    const ul = document.querySelectorAll('ul > li')
+    console.log(typeof ul, ul);
+    console.log(ul.length);
+
+    for (let i = 0; i < ul.length; i++) {
+        ul[i].remove()
+    }
+
+})
+
+
+// EXTRA 
+// 41) Add an eventListener to alert when the mouse is over a link, displaying the URL
+// ! check why if doesn't work
+const linksExtra = document.querySelectorAll('a')
+
+linksExtra.forEach((link) => {
+    link.addEventListener('mouseover', function () {
+        const textToAlert = link.href
+        if (link.href === '#') {
+            alert(`DON'T TOUCH ME! MIAO`)
+        } else {
+            alert(textToAlert)
+
+        }
+    })
+})
+
+// 42) Add a button to hide every image on the page
+window.addEventListener('DOMContentLoaded', function () {
+    // alert('DOM IS LOADED')
+    const toggleImg = document.createElement('button')
+    toggleImg.id = '#toggle-img'
+    toggleImg.innerText = 'Hide/Show My Little Friend'
+    toggleImg.style.marginLeft = '.4rem'
+    const father = document.querySelector('#ex-37')
+    father.appendChild(toggleImg)
+
+    toggleImg.addEventListener('click', function () {
+        // get reference to img
+        const images = document.querySelectorAll('img')
+        // loop to hide
+        for (let i = 0; i < images.length; i++) {
+            images[i].classList.toggle('hide')
+        }
+    })
+
+    // 43) Add a button to hide and show the table from the page
+
+    const toggleTable = document.createElement('button')
+    toggleTable.innerText = 'Show/Hide Table'
+    toggleTable.style.marginLeft = '.4rem'
+    father.appendChild(toggleTable)
+    toggleTable.addEventListener('click', () => {
+        const table = document.querySelector('table')
+        table.classList.toggle('hide')
+    })
+
+
+    // 44) Write a function to sum every number inside the TD (if the content is numeric)
+
+    const sumTd = document.createElement('button')
+    sumTd.innerText = 'Sum Table Datas'
+    sumTd.style.marginLeft = '.4rem'
+    father.appendChild(sumTd)
+    sumTd.addEventListener('click', () => {
+        // array con tr => 4
+        const tableRows = document.querySelector('table').rows
+        console.log(tableRows);
+        // ogni row ha un array con gli elementi td (cells)
+        const arrayTDMatrix = []
+        for (let i = 0; i < tableRows.length; i++) {
+            arrayTDMatrix.push(tableRows[i].cells)
+        }
+        console.log(arrayTDMatrix);
+        // tr.cells => array coi td
+        // ora dovrei avere un array con dentro 4 array i quali dentro hanno 5 td
+        // tiriamo fuori i td 
+        const arrayTD = []
+        for (let a = 0; a < arrayTDMatrix.length; a++) {
+            for (let b = 0; b < arrayTDMatrix[a].length; b++) {
+                arrayTD.push(arrayTDMatrix[a][b])
+            }
+        }
+        console.log(arrayTD); // BECCATO!!!!
+        // ogni td ha la proprietà .innertext che mi serve
+
+        const arrayDataValue = []
+        for (let element of arrayTD) {
+            arrayDataValue.push(element.innerText)
+        }
+        console.log(arrayDataValue);
+
+
+
+
+
+        // const arrayOfTdata = [];
+        // for (let i = 0; i < tableRows.length; i++) {
+
+        //     arrayOfTdata.push(tableRows[i].cells.innerText)
+        // }
+        // console.log(arrayOfTdata);
+    })
+})
+
+
+
+
+
+
+// 45) Delete the last letter from the title each time the user clicks on it
+// 46) Change a single TD background color when the user clicks on it
+// 47) Add a button DELETE, on click it should delete a random TD from the page
+// 48) Add a pink border to a cell when the mouse is over it
+// 49) Write a function to add a table with 4 rows and 3 columns programmatically
+// 50) Write a function to remove the table from the page
