@@ -341,8 +341,41 @@ window.addEventListener('DOMContentLoaded', function () {
 
 
 // 45) Delete the last letter from the title each time the user clicks on it
+const title = document.querySelector('title');
+let clickCount = 0
+title.addEventListener('click', () => {
+    cl
+
+})
 // 46) Change a single TD background color when the user clicks on it
 // 47) Add a button DELETE, on click it should delete a random TD from the page
 // 48) Add a pink border to a cell when the mouse is over it
+
 // 49) Write a function to add a table with 4 rows and 3 columns programmatically
+
+const father = document.querySelector('section')
+const addTable = document.createElement('button')
+addTable.innerText = 'Add new table'
+addTable.style.marginLeft = '.4rem'
+father.appendChild(addTable)
+const aggiungiTable = () => {
+    const newTable = document.createElement('table')
+    newTable.innerHTML = '<tr><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td></tr>'
+    father.appendChild(newTable)
+    return newTable
+}
+addTable.addEventListener('click', aggiungiTable)
+
+
+
 // 50) Write a function to remove the table from the page
+
+const removeTable = document.createElement('button')
+const remove = document.createElement('button')
+removeTable.innerText = 'Remove table'
+removeTable.style.marginLeft = '.4rem'
+father.appendChild(removeTable)
+
+removeTable.addEventListener('click', function () {
+    father.removeChild(aggiungiTable())
+})
