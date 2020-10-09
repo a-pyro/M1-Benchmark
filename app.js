@@ -306,6 +306,22 @@ window.addEventListener('DOMContentLoaded', function () {
         }
         console.log(arrayDataValue);
 
+        // ora ho array con tutti i value che sono stringhe quindi parse int
+
+        for (let element of arrayDataValue) {
+            if (isNaN(parseInt(element))) {
+                alert('Please Insert Numbers to do the sum!')
+                break;
+            } else {
+                let sum = 0;
+                for (let number of arrayDataValue) {
+                    sum += parseInt(number)
+                }
+                alert(`The sum is: ${sum}`)
+            }
+        }
+
+
 
 
 
