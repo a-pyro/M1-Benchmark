@@ -25,6 +25,8 @@ td {
     width: 120px;
     border-radius: 10px;
     margin: .2rem;
+    height: 120px;
+
 
 }
 
@@ -62,7 +64,7 @@ p {
 
 tr {
     outline: 1px dotted red;
-
+    display: block
 }
 
 #ex-34,

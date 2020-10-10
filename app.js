@@ -151,12 +151,24 @@ fireHeading.addEventListener('click', function () {
 // %implement remove row & sett new images for each new row generated
 const addExtraRow = document.querySelector('#extra-row')
 addExtraRow.onclick = function () {
-    // get the row reference to the father Table
-    const table = document.querySelector('table')
+    // get the firs tRow reference to the father tbody
+    const firstTableRow = document.querySelector('tr')
+    console.log('tbody reference', firstTableRow);
     // generating tr
     const newRow = document.createElement('tr')
-    console.log(newRow);
-    table.insertBefore(newRow, table.childNodes[0])
+
+    // append TD in TR
+    for (i = 0; i < 4; i++) {
+        // generate td 
+        const newTD = document.createElement('td')
+        newTD.classList.add('border')
+        newRow.appendChild(newTD)
+    }
+    console.log('new row created:', newRow);
+    firstTableRow.insertBefore(newRow, firstTableRow.childNodes[0])
+
+    // Fixed
+
 
 }
 
@@ -358,6 +370,7 @@ const addTable = document.createElement('button')
 addTable.innerText = 'Add new table'
 addTable.style.marginLeft = '.4rem'
 father.appendChild(addTable)
+
 const aggiungiTable = () => {
     const newTable = document.createElement('table')
     newTable.innerHTML = '<tr><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td></tr>'
@@ -369,7 +382,7 @@ addTable.addEventListener('click', aggiungiTable)
 
 
 // 50) Write a function to remove the table from the page
-
+// !need fix
 const removeTable = document.createElement('button')
 const remove = document.createElement('button')
 removeTable.innerText = 'Remove table'
