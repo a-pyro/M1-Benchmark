@@ -238,14 +238,14 @@ fireList.addEventListener('click', function () {
 
 // EXTRA 
 // 41) Add an eventListener to alert when the mouse is over a link, displaying the URL
-// ! check why if doesn't work
+
 const linksExtra = document.querySelectorAll('a')
 
 linksExtra.forEach((link) => {
     link.addEventListener('mouseover', function () {
         const textToAlert = link.href
-        if (link.href === '#') {
-            alert(`DON'T TOUCH ME! MIAO`)
+        if (link.href === "#") {
+            alert('DONT TOUCH ME! MIAO')
         } else {
             alert(textToAlert)
 
@@ -291,6 +291,7 @@ window.addEventListener('DOMContentLoaded', function () {
     sumTd.style.marginLeft = '.4rem'
     father.appendChild(sumTd)
     sumTd.addEventListener('click', () => {
+        /*
         // array con tr => 4
         const tableRows = document.querySelector('table').rows
         console.log(tableRows);
@@ -333,17 +334,34 @@ window.addEventListener('DOMContentLoaded', function () {
             }
         }
 
+        */
+
+        // %Faster solution
+        const tableDatas = document.querySelectorAll('td')
+        console.log('table datas ref', tableDatas);
+        /* test
+         tableDatas.forEach((element => {
+             element.innerText = `${Math.ceil(Math.random() * 10)}`
+         }))
+         */
+
+        let sum = 0
+        for (let element of tableDatas) {
+            if (isNaN(parseInt(element.innerText))) {
+                alert('num needed to sum')
+                break
+            } else {
+                sum += parseInt(element.innerText)
+            }
+        }
+        console.log(sum);
 
 
 
 
 
-        // const arrayOfTdata = [];
-        // for (let i = 0; i < tableRows.length; i++) {
 
-        //     arrayOfTdata.push(tableRows[i].cells.innerText)
-        // }
-        // console.log(arrayOfTdata);
+
     })
 })
 
@@ -353,15 +371,88 @@ window.addEventListener('DOMContentLoaded', function () {
 
 
 // 45) Delete the last letter from the title each time the user clicks on it
-const title = document.querySelector('title');
-let clickCount = 0
+const title = document.querySelector('h1');
 title.addEventListener('click', () => {
-    cl
+
+    title.innerText = `${title.innerText.slice(0, title.innerText.length -1)}`
 
 })
+
+
 // 46) Change a single TD background color when the user clicks on it
+const tableDatas = document.querySelectorAll('td')
+tableDatas.forEach((td) => {
+    td.classList.add('td')
+})
+// console.log(tableDatas);
+const changeTdBgColor = function (event) {
+    // console.log(event);
+    const target = event.target
+    target.classList.toggle('td-pink-bg')
+    // console.log(target);
+
+
+}
+tableDatas.forEach(() => {
+    addEventListener('click', changeTdBgColor)
+})
+
+
 // 47) Add a button DELETE, on click it should delete a random TD from the page
+
+const deleteRandomTD = document.createElement('button')
+deleteRandomTD.innerText = 'Delete Random TD'
+deleteRandomTD.style.display = 'block'
+document.querySelector('#ex-36').appendChild(deleteRandomTD)
+const tableDataHTMLCollection = document.getElementsByClassName('td')
+console.log(tableDataHTMLCollection);
+deleteRandomTD.addEventListener('click', function () {
+    // const tableDatas = document.querySelectorAll('td')
+    // console.log(tableDatas);
+    /* !Doesnt work like that with nodelists 
+    since we cant directly remove from a node list i'm pushing the elements into an array, where i'll remove a random item and then push back to the node list //lets try
+    const array = []
+    tableDatas.forEach((element) => {
+        array.push(element)
+    })
+    console.log(array);
+    // splicing one random item
+    array.splice(Math.floor(Math.random() * array.length), 1)
+    console.log(array); //works
+    // let's try to pushback
+    array.forEach((element) => {
+        tableDatas.push(element)
+    })
+*/
+    // console.log(tableDatas);
+    // building a random number based on the td array length to use as index to delete the td
+    const randomNumber = () => {
+        return Math.ceil(Math.random() * tableDatas.length - 1)
+    }
+
+    const random = randomNumber();
+    console.log(random);
+    // &let's try getting reference to the node list (got it from line 383)
+    console.log(tableDatas);
+
+    // remove a node with random index
+    tableDatas[random].remove()
+
+
+})
 // 48) Add a pink border to a cell when the mouse is over it
+// 48) Add a pink border to a cell when the mouse is over it
+// 48) Add a pink border to a cell when the mouse is over it
+
+// create the function
+const pinkBorder = function (event) {
+    const target = event.target
+    target.classList.toggle('pink-border')
+}
+// adding event mouse over
+for (let element of tableDatas) {
+    element.addEventListener('mouseover', pinkBorder)
+}
 
 // 49) Write a function to add a table with 4 rows and 3 columns programmatically
 
@@ -374,15 +465,16 @@ father.appendChild(addTable)
 const aggiungiTable = () => {
     const newTable = document.createElement('table')
     newTable.innerHTML = '<tr><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td></tr>'
+    newTable.classList.add('table')
     father.appendChild(newTable)
-    return newTable
 }
+
 addTable.addEventListener('click', aggiungiTable)
 
 
 
 // 50) Write a function to remove the table from the page
-// !need fix
+
 const removeTable = document.createElement('button')
 const remove = document.createElement('button')
 removeTable.innerText = 'Remove table'
@@ -390,5 +482,16 @@ removeTable.style.marginLeft = '.4rem'
 father.appendChild(removeTable)
 
 removeTable.addEventListener('click', function () {
-    father.removeChild(aggiungiTable())
+    // console.log(father.childNodes);
+    // removing the last child from the father
+    // before need to check he's a table
+    console.log(father.childNodes[father.childNodes.length - 1]);
+    const classList = father.childNodes[father.childNodes.length - 1].classList
+    console.log(classList.contains('table'));
+    if (classList.contains('table')) {
+        father.removeChild(father.childNodes[father.childNodes.length - 1])
+    } else {
+        alert(`there's no table to remove`)
+    }
+
 })
