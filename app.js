@@ -225,12 +225,12 @@ addLi.addEventListener('click', function () {
 
 const fireList = document.querySelector('#empty-list')
 fireList.addEventListener('click', function () {
-    const ul = document.querySelectorAll('ul > li')
-    console.log(typeof ul, ul);
-    console.log(ul.length);
+    const liNodeList = document.querySelectorAll('ul > li')
+    console.log(typeof liNodeList, liNodeList);
+    console.log(liNodeList.length);
 
-    for (let i = 0; i < ul.length; i++) {
-        ul[i].remove()
+    for (let i = 0; i < liNodeList.length; i++) {
+        liNodeList[i].remove()
     }
 
 })
